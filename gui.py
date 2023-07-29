@@ -1,15 +1,16 @@
-# Import necessary modules
+# gui.py
+
 import tkinter as tk
 from tkinter import filedialog
 from model import TextToSpeechModel
 from audio_utils import AudioUtils
 
 class App:
-    def __init__(self, master):
+    def __init__(self, master, device):
         # Create main frame
         self.master = master
-        # Load model
-        self.text_to_speech_model = TextToSpeechModel("suno/bark-small")
+        # Load model with the specified device
+        self.text_to_speech_model = TextToSpeechModel("suno/bark-small", device=device)
         # Create and set text input variable
         self.text_input = tk.StringVar()
         # Create and place text input field
@@ -25,8 +26,16 @@ class App:
     def generate_speech(self):
         # Get the text input
         text = self.text_input.get()
-        # Convert the text to speech
+
+        # Move the text tensor to the GPU
+        text = text.to(self.text_to_speech_model.device)
+
+        # Convert the text to speech using the specified device
         self.speech_values = self.text_to_speech_model.text_to_speech(text)
+
+        # Move the generated speech tensor to the CPU for audio playback
+        self.speech_values = self.speech_values.to("cpu")
+
         # Play the audio
         AudioUtils.play_audio(self.speech_values)
 
