@@ -1,6 +1,6 @@
 # Bark Text-to-Speech (Bark-TTS)
 
-Bark-TTS is an open-source project by [nicollasm](https://github.com/nicollasm) for generating speech from text inputs using the transformer-based text-to-audio model, Bark, created by Suno. This project is a version 2, having been tested and optimized by a team of evaluators and developers.
+Bark-TTS is an open-source project by [nicollasm](https://github.com/nicollasm) for generating speech from text inputs using the transformer-based text-to-audio model, Bark, created by Suno.
 
 Connect with me on [Instagram](https://instagram.com/nicollasnclm).
 
